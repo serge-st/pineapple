@@ -4,25 +4,25 @@
   padding: 0;
   box-sizing: border-box;
 }
-.heading-text {
-  color: #131821;
-  font-family: Georgia;
-  font-size: 32px;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 44px;
-}
 .primary-text {
   color: #6A707B;
   font-family: Arial;
-  font-size: 16px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+}
+.heading-text {
+  color: #131821;
+  font-family: Georgia;
+  font-size: 24px;
+  line-height: 34px;
   font-style: normal;
   font-weight: normal;
 }
 a {
   color: #6A707B;
   font-family: Arial;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: normal;
   text-decoration: none;
@@ -66,10 +66,9 @@ ul#menu li {
 ul#menu a {
   color: #6A707B;
   font-family: Arial;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
 }
 .mobile-background {
   position: absolute;
@@ -91,21 +90,18 @@ main > * {
 .heading-text-block h1 {
   color: #131821;
   font-family: Georgia;
-  font-size: 32px;
+  font-size: 24px;
   font-style: normal;
   font-weight: normal;
-  line-height: 44px;
-  font-size: 24px;
   line-height: 34px;
 }
 .heading-text-block p {
   margin-top: 10px;
   color: #6A707B;
   font-family: Arial;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
   line-height: 26px;
 }
 input#email {
@@ -117,18 +113,20 @@ input#email {
   border-left: 4px solid #4066A5;
   color: #6A707B;
   font-family: Arial;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: normal;
   color: #131821;
+  font-size: 16px;
   line-height: 24px;
 }
 input#email::placeholder {
   color: #6A707B;
   font-family: Arial;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: normal;
+  font-size: 16px;
 }
 input#email:focus {
   outline: none;
@@ -159,13 +157,15 @@ input#email:hover {
   display: inline-block;
   color: #6A707B;
   font-family: Arial;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: normal;
+  font-size: 16px;
   line-height: 28px;
 }
 .service-terms p a {
   color: #131821;
+  font-size: 16px;
   text-decoration: underline;
 }
 .checkbox {
@@ -306,7 +306,12 @@ footer {
     line-height: 40px;
   }
   ul#menu {
+    position: relative;
+    top: 1px;
     line-height: 26px;
     vertical-align: bottom;
+  }
+  ul#menu a {
+    font-size: 16px;
   }
 }

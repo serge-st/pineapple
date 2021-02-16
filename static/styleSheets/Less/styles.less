@@ -21,19 +21,20 @@
     box-sizing: border-box; 
 }
 
-.heading-text {
-    color: @dark;
-    font-family: Georgia;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 44px;
-}
-
 .primary-text {
     color: @gray;
     font-family: Arial;
-    font-size: 16px;
+    // font-size: 16px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.heading-text {
+    color: @dark;
+    font-family: Georgia;
+    font-size: 24px;
+    line-height: 34px;
     font-style: normal;
     font-weight: normal;
 }
@@ -98,7 +99,7 @@ ul#menu {
 
     a {
         .primary-text;
-        font-size: 14px;
+        // font-size: 14px;
     }
 }
 
@@ -127,7 +128,6 @@ main {
 .heading-text-block {
     h1 {
         .heading-text;
-        font-size: 24px;
         line-height: 34px;
     }
 
@@ -135,7 +135,6 @@ main {
         margin-top: 10px;
 
         .primary-text;
-        font-size: 14px;
         line-height: 26px;
     }
 }
@@ -151,10 +150,12 @@ input#email {
 
     .primary-text;
     color: @dark;
+    font-size: 16px;
     line-height: 24px;
     
     &::placeholder {
         .primary-text;
+        font-size: 16px;
     }
 
     &:focus {
@@ -192,10 +193,12 @@ input#email {
         display: inline-block;
 
         .primary-text;
+        font-size: 16px;
         line-height: 28px;
 
         a {
             color: @dark;
+            font-size: 16px;
             text-decoration: underline; 
         }
     }
@@ -376,34 +379,18 @@ footer {
         height: 40px;
     
         line-height: 40px;
-    }
 
+    }
+    
     ul#menu {
+        position: relative;
+        top: 1px;
+        
         line-height: 26px;
-
         vertical-align: bottom;
-
-
+        
+        a {
+            font-size: 16px;
+        }
     }
-
-    // ul#menu {
-    //     margin: 0 21px;
-    
-    //     display: inline-block;
-    
-    //     line-height: 24px;
-    //     vertical-align: middle;
-    
-    //     li {
-    //         margin-left: 20px;
-    
-    //         display: inline-block;
-    //     }
-    
-    //     a {
-    //         .primary-text;
-    //         font-size: 14px;
-    //     }
-    // }
-
 }
