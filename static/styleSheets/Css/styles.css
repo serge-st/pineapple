@@ -175,6 +175,7 @@ input#email:hover {
   width: 26px;
   display: inline-block;
   background: #4066A5;
+  border: 1px solid #E3E3E4;
   border-radius: 3px;
 }
 .checkbox:hover {
@@ -313,5 +314,24 @@ footer {
   }
   ul#menu a {
     font-size: 16px;
+  }
+  main {
+    position: initial;
+    margin: 234px 0 0;
+    padding: 0 0 0 40px;
+    width: 100%;
+    background: none;
+  }
+  main > * {
+    margin-top: 0;
+  }
+  .heading-text-block h1 {
+    font-size: 32px;
+    line-height: 44px;
+  }
+  .heading-text-block p {
+    margin-top: 15px;
+    font-size: 16px;
+    line-height: 28px;
   }
 }
