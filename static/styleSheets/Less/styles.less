@@ -341,8 +341,69 @@ footer {
     }
 }
 
-// Surgace Duo
-@media screen and (max-width: 540px) {
-    main {
+@media screen and (min-width: 550px) {
+    .mobile-background {
+        display: none;
     }
+
+    #root {
+        padding: 100px;
+        width: 680px;
+
+        display: block;
+
+        background: @gradient-background;
+    }
+
+    header {
+        position: initial;
+
+        height: 40px;
+        width: 480px;
+
+        background: none;
+    }
+
+    #logo {
+        margin: 0;
+        width: 118px;
+
+        background: url(../../images/logo_pineapple-1.svg);
+        background-size: 118px 40px; 
+    }
+
+    nav {
+        height: 40px;
+    
+        line-height: 40px;
+    }
+
+    ul#menu {
+        line-height: 26px;
+
+        vertical-align: bottom;
+
+
+    }
+
+    // ul#menu {
+    //     margin: 0 21px;
+    
+    //     display: inline-block;
+    
+    //     line-height: 24px;
+    //     vertical-align: middle;
+    
+    //     li {
+    //         margin-left: 20px;
+    
+    //         display: inline-block;
+    //     }
+    
+    //     a {
+    //         .primary-text;
+    //         font-size: 14px;
+    //     }
+    // }
+
 }
