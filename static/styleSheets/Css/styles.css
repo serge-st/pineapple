@@ -1,3 +1,29 @@
+/* CSS TEMPLATE
+    POSTION
+    position
+    top
+    left
+    right
+    z-index
+
+    BLOCK STRUCTURE
+    margin
+    padding
+    wight
+    height
+    border
+
+    DISPLAY
+    display
+    float
+    clear
+    overflow
+
+    OTHER
+    font-size
+    ::-webkit-textfield-decoration-containercolor
+    backgound
+*/
 * {
   border: 0;
   margin: 0;
@@ -26,6 +52,9 @@ a {
   font-style: normal;
   font-weight: normal;
   text-decoration: none;
+}
+.desktop-background {
+  display: none;
 }
 #root {
   height: 100vh;
@@ -362,5 +391,8 @@ footer {
   footer {
     margin: 50px 0 0 78px;
     width: 244px;
+  }
+  .desktop-background {
+    display: initial;
   }
 }
