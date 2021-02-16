@@ -175,7 +175,6 @@ input#email:hover {
   width: 26px;
   display: inline-block;
   background: #4066A5;
-  border: 1px solid #E3E3E4;
   border-radius: 3px;
 }
 .checkbox:hover {
@@ -349,5 +348,11 @@ footer {
     position: absolute;
     z-index: 2;
     right: 81px;
+  }
+  .service-terms {
+    margin-top: 53px;
+  }
+  hr {
+    margin-top: 50px;
   }
 }
