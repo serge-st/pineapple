@@ -349,13 +349,18 @@ footer {
         display: none;
     }
 
+    body {
+        display: flex;
+
+        background: @gradient-background;
+    }
+
     #root {
         padding: 100px;
         width: 680px;
+        height: 100vh;
 
-        display: block;
-
-        background: @gradient-background;
+        display: inline-block;
     }
 
     header {
@@ -447,6 +452,17 @@ footer {
 
     hr {
         margin-top: 50px;
+    }
+
+    footer {
+        margin: 50px 0 0 78px;
+        width: 244px;
+    }
+
+    .desktop-background {
+        // float: right;
+        // position: absolute;
+        // left: 
     }
     
 }
