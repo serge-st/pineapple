@@ -1,0 +1,281 @@
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.heading-text {
+  color: #131821;
+  font-family: Georgia;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 44px;
+}
+.primary-text {
+  color: #6A707B;
+  font-family: Arial;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+}
+a {
+  color: #6A707B;
+  font-family: Arial;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+}
+#root {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+}
+header {
+  position: absolute;
+  top: 0;
+  height: 66px;
+  width: 100%;
+  display: flex;
+  background: #FFF;
+  justify-content: space-between;
+}
+#logo {
+  margin: 10px 20px;
+  height: 40px;
+  width: 25px;
+  display: inline-block;
+  background: url(../../images/logo_pineapple.svg);
+  background-size: 25px 40px;
+}
+nav {
+  height: 66px;
+  line-height: 66px;
+}
+ul#menu {
+  margin: 0 21px;
+  display: inline-block;
+  line-height: 24px;
+  vertical-align: middle;
+}
+ul#menu li {
+  margin-left: 20px;
+  display: inline-block;
+}
+ul#menu a {
+  color: #6A707B;
+  font-family: Arial;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+}
+.mobile-background {
+  position: absolute;
+  top: 66px;
+  z-index: -1;
+  width: 100%;
+}
+main {
+  position: relative;
+  top: 66px;
+  margin: auto;
+  padding: 10px 20px 30px;
+  width: 335px;
+  background: linear-gradient(180deg, #FFF 0%, #F2F5FA 100%);
+}
+main > * {
+  margin-top: 20px;
+}
+.heading-text-block h1 {
+  color: #131821;
+  font-family: Georgia;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 44px;
+  font-size: 24px;
+  line-height: 34px;
+}
+.heading-text-block p {
+  margin-top: 10px;
+  color: #6A707B;
+  font-family: Arial;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 26px;
+}
+input#email {
+  padding: 0 15px;
+  height: 60px;
+  width: 100%;
+  background-color: #FFF;
+  border: 1px solid #E3E3E4;
+  border-left: 4px solid #4066A5;
+  color: #6A707B;
+  font-family: Arial;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  color: #131821;
+  line-height: 24px;
+}
+input#email::placeholder {
+  color: #6A707B;
+  font-family: Arial;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+}
+input#email:focus {
+  outline: none;
+  box-shadow: 0px 30px 40px rgba(19, 24, 33, 0.06);
+}
+input#email:hover {
+  border: 1px solid #4066A5;
+  border-left: 4px solid #4066A5;
+  box-shadow: 0px 30px 40px rgba(19, 24, 33, 0.06);
+}
+.input-arrow {
+  position: relative;
+}
+.input-arrow:before {
+  position: absolute;
+  top: 2px;
+  right: 15px;
+  width: 24px;
+  height: 14px;
+  background: url(../../images/ic_arrow.svg);
+  content: "";
+}
+.service-terms {
+  margin-top: 20px;
+}
+.service-terms p {
+  margin-left: 15px;
+  display: inline-block;
+  color: #6A707B;
+  font-family: Arial;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 28px;
+}
+.service-terms p a {
+  color: #131821;
+  text-decoration: underline;
+}
+.checkbox {
+  position: relative;
+  padding: 5px 6px;
+  height: 26px;
+  width: 26px;
+  display: inline-block;
+  background: #4066A5;
+  border-radius: 3px;
+}
+.checkbox:hover {
+  cursor: pointer;
+}
+hr {
+  border-top: 1px solid #E3E3E4;
+}
+footer {
+  margin-left: auto;
+  margin-right: auto;
+  width: 214px;
+  display: flex;
+  justify-content: space-between;
+}
+.icon-cirkle,
+.fb,
+.ig,
+.twitter,
+.youtube {
+  padding: 15px;
+  height: 46px;
+  width: 46px;
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid #E3E3E4;
+  transition: all 0.2s ease-in-out;
+}
+.icon-cirkle:hover {
+  box-shadow: 0px 20px 40px rgba(19, 24, 33, 0.3);
+  cursor: pointer;
+}
+.icon-cirkle:hover path {
+  fill: #FFF;
+  opacity: 1;
+}
+.icon {
+  position: relative;
+}
+.icon path {
+  fill: #131821;
+  opacity: 0.3;
+}
+.fb .icon {
+  left: 2px;
+  bottom: 1px;
+}
+.fb:hover {
+  background: #4267B2;
+  border: 2px solid #4267B2;
+}
+.fb:active {
+  background: #2F4A80;
+  border: 2px solid #2F4A80;
+}
+.ig .icon {
+  right: 2px;
+  bottom: 1px;
+}
+.ig:hover {
+  background: #C13584;
+  border: 2px solid #C13584;
+}
+.ig:active {
+  background: #8F2762;
+  border: 2px solid #8F2762;
+}
+.twitter .icon {
+  right: 1px;
+  bottom: 1px;
+}
+.twitter:hover {
+  background: #1DA1F2;
+  border: 2px solid #1DA1F2;
+}
+.twitter:active {
+  background: #177FBF;
+  border: 2px solid #177FBF;
+}
+.youtube .icon {
+  right: 2px;
+  bottom: 2px;
+}
+.youtube:hover {
+  background: #FF0000;
+  border: 2px solid #FF0000;
+}
+.youtube:active {
+  background: #CC0000;
+  border: 2px solid #CC0000;
+}
+@media screen and (max-width: 280px) {
+  #root {
+    zoom: 0.8;
+  }
+  .mobile-background {
+    height: 100%;
+  }
+}
+@media screen and (device-aspect-ratio: 40/71) {
+  #root {
+    zoom: 0.9;
+  }
+}
