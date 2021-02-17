@@ -6,6 +6,12 @@
     <title>Pineapple</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 115 100%22><text y=%22.9em%22 font-size=%2290%22>🍍</text></svg>">
     <link rel="stylesheet" href="/static/styleSheets/Css/styles.css">
+
+    <!-- DEV Vue Version -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <!-- PROD Vue Version -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
 </head>
 <body>
 
@@ -29,11 +35,15 @@
             <img src="/static/images/image_summer.png" alt="pineapple background image" class="mobile-background">
 
             <main>
+
+                <img :src="trophyImage" alt="Success Trophy Icon" class="success-trophy" v-show="isSubmissionSuccessful">
         
                 <section class="heading-text-block">
-                    <h1>Subscribe to newsletter</h1>
+                    <!-- <h1>Subscribe to newsletter</h1> -->
+                    <h1>{{ heading }}</h1>
     
-                    <p>Subscribe to our newsletter and get 10% discount on pineapple glasses.</p>
+                    <!-- <p>Subscribe to our newsletter and get 10% discount on pineapple glasses.</p> -->
+                    <p>{{ paragraph }}</p>
                 </section>
     
                 <form action="" method="POST">
@@ -42,7 +52,7 @@
                         <input type="email" name="email" id="email" placeholder="Type your email address here…">
                     </label>
 
-                    <div class="error-message"></div>
+                    <div class="error-message">Error Message</div>
     
                     <div class="service-terms">
                         <div class="checkbox">
@@ -90,5 +100,7 @@
         </div>
         
         <img src="/static/images/image_summer-1.png" alt="pineapple background image" class="desktop-background">
+
+        <script src="js/main.js"></script>
 </body>
 </html>

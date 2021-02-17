@@ -116,6 +116,9 @@ main {
 main > * {
   margin-top: 20px;
 }
+.success-trophy {
+  margin-bottom: 15px;
+}
 .heading-text-block h1 {
   color: #131821;
   font-family: Georgia;
@@ -177,6 +180,15 @@ input#email:hover {
   height: 14px;
   background: url(../../images/ic_arrow.svg);
   content: "";
+}
+.error-message {
+  display: none;
+  margin-top: 20px;
+  color: #6A707B;
+  font-family: Arial;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
 }
 .service-terms {
   margin-top: 20px;
@@ -372,6 +384,12 @@ footer {
   }
   main > * {
     margin-top: 0;
+  }
+  .main-success {
+    margin-top: 130px;
+  }
+  .success-trophy {
+    margin-bottom: 30px;
   }
   .heading-text-block h1 {
     font-size: 32px;

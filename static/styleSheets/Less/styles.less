@@ -155,6 +155,10 @@ main {
     }
 }
 
+.success-trophy {
+    margin-bottom: 15px
+}
+
 .heading-text-block {
     h1 {
         .heading-text;
@@ -213,6 +217,12 @@ input#email {
         background: url(../../images/ic_arrow.svg);
         content: "";
     }
+}
+
+.error-message {
+    display: none;
+    margin-top: 20px;
+    .primary-text;
 }
 
 .service-terms {
@@ -401,6 +411,8 @@ footer {
     }
 }
 
+// DESKTOP STYLES
+
 @media screen and (min-width: 1025px) {
     .mobile-background {
         display: none;
@@ -468,6 +480,14 @@ footer {
         & > * {
             margin-top: 0
         }
+    }
+
+    .main-success {
+        margin-top: 130px;
+    }
+
+    .success-trophy {
+        margin-bottom: 30px
     }
     
     .heading-text-block {
