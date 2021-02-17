@@ -308,7 +308,23 @@ footer {
     zoom: 0.9;
   }
 }
-@media screen and (min-width: 550px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+  #root {
+    zoom: 1.5;
+  }
+  main {
+    margin-top: 23%;
+  }
+}
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
+  #root {
+    zoom: 1.7;
+  }
+  main {
+    margin-top: 30%;
+  }
+}
+@media screen and (min-width: 1025px) {
   .mobile-background {
     display: none;
   }
