@@ -4,7 +4,7 @@ const app = new Vue({
         heading: "Subscribe to newsletter",
         paragraph: "Subscribe to our newsletter and get 10% discount on pineapple glasses.",
         trophyImage: "../static/images/ic_success.svg",
-        isSubmissionSuccessful: true,
+        isSubmissionSuccessful: 0,
     }
 
 });

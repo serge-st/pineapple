@@ -201,11 +201,13 @@ input#email {
         border: 1px solid @blue;border-left: 4px solid @blue;
         box-shadow: 0px 30px 40px rgba(19, 24, 33, 0.06);
     }
+
+
 }
 
 .input-arrow {
     position: relative;
-    &:before {
+    &::before {
         position: absolute;
         top: 2px;
         right: 15px;
@@ -217,6 +219,23 @@ input#email {
         background: url(../../images/ic_arrow.svg);
         content: "";
     }
+}
+
+.submit-btn {
+    position: absolute;
+    top: -20px;
+    right: 0;
+    z-index: 2;
+
+    width: 58px;
+    height: 58px;
+
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline:none;
 }
 
 .error-message {
@@ -516,12 +535,25 @@ footer {
     
     .input-arrow {
         position: relative;
-        &:before {
-            position: absolute;
+        &::before {
             z-index: 2;
             right: 81px;
         }
     }
+
+    .submit-btn {
+        top: -25px;
+        right: 41px;
+
+        height: 68px;
+        width: 82px;
+    }
+    
+    // .error-message {
+    //     display: none;
+    //     margin-top: 20px;
+    //     .primary-text;
+    // }
 
     .service-terms {
         margin-top: 53px;

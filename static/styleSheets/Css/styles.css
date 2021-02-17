@@ -172,7 +172,7 @@ input#email:hover {
 .input-arrow {
   position: relative;
 }
-.input-arrow:before {
+.input-arrow::before {
   position: absolute;
   top: 2px;
   right: 15px;
@@ -180,6 +180,20 @@ input#email:hover {
   height: 14px;
   background: url(../../images/ic_arrow.svg);
   content: "";
+}
+.submit-btn {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  z-index: 2;
+  width: 58px;
+  height: 58px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
 }
 .error-message {
   display: none;
@@ -411,10 +425,15 @@ footer {
   .input-arrow {
     position: relative;
   }
-  .input-arrow:before {
-    position: absolute;
+  .input-arrow::before {
     z-index: 2;
     right: 81px;
+  }
+  .submit-btn {
+    top: -25px;
+    right: 41px;
+    height: 68px;
+    width: 82px;
   }
   .service-terms {
     margin-top: 53px;
