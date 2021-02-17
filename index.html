@@ -34,19 +34,19 @@
 
             <img src="/static/images/image_summer.png" alt="pineapple background image" class="mobile-background">
 
-            <main>
+            <main :class="{'main-success': isSubmissionSuccessful}">
 
                 <img :src="trophyImage" alt="Success Trophy Icon" class="success-trophy" v-show="isSubmissionSuccessful">
         
                 <section class="heading-text-block">
                     <!-- <h1>Subscribe to newsletter</h1> -->
-                    <h1>{{ heading }}</h1>
+                    <h1>{{ isSubmissionSuccessful ? successHeading : heading }}</h1>
     
                     <!-- <p>Subscribe to our newsletter and get 10% discount on pineapple glasses.</p> -->
-                    <p>{{ paragraph }}</p>
+                    <p>{{ isSubmissionSuccessful ? successParagraph : paragraph }}</p>
                 </section>
     
-                <form action="" method="POST">
+                <form action="" method="POST" v-show="!isSubmissionSuccessful">
     
                     <label class="input-arrow">
                         <input type="email" name="email" id="email" placeholder="Type your email address here…">
