@@ -206,6 +206,7 @@ input#email:hover {
 }
 .service-terms {
   margin-top: 20px;
+  user-select: none;
 }
 .service-terms p {
   margin-left: 15px;
@@ -224,8 +225,9 @@ input#email:hover {
   text-decoration: underline;
 }
 .checkbox,
-.checkbox-clicked {
+.checked {
   position: relative;
+  padding: 4px 5px;
   height: 26px;
   width: 26px;
   display: inline-block;
@@ -235,13 +237,12 @@ input#email:hover {
 .checkbox:hover {
   cursor: pointer;
 }
-.checkbox-clicked {
-  padding: 5px 6px;
-  background: #4066A5;
-  border: none;
+.hidden {
+  visibility: hidden;
 }
-.checkbox-clicked:hover {
-  cursor: pointer;
+.checked {
+  background: #4066A5;
+  border: 1px solid #4066A5;
 }
 hr {
   border-top: 1px solid #E3E3E4;

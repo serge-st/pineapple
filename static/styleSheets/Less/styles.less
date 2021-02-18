@@ -246,6 +246,8 @@ input#email {
 
 .service-terms {
     margin-top: 20px;
+    
+    user-select: none;
     p {
         margin-left: 15px;
 
@@ -265,14 +267,14 @@ input#email {
 
 .checkbox {
     position: relative;
+    padding: 4px 5px;
     
     height: 26px;
     width: 26px;
-
+    
     display: inline-block;
-
+    
     border: 1px solid @light-gray;
-    // background: @blue;
     border-radius: 3px;
 
     &:hover {
@@ -280,15 +282,13 @@ input#email {
     }
 }
 
-.checkbox-clicked:extend(.checkbox){
-    padding: 5px 6px;
+.hidden {
+    visibility: hidden;
+}
 
+.checked:extend(.checkbox){
     background: @blue;
-    border: none;
-
-    &:hover {
-        cursor: pointer;
-    }
+    border: 1px solid @blue;
 }
 
 hr {
