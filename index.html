@@ -19,9 +19,8 @@
         
             <header>
                 
-                    <div id="logo">
-                    </div>
-                
+                <div id="logo">
+                </div>
                 
                 <nav>
                     <ul id="menu">
@@ -49,7 +48,7 @@
                 <form action="" method="POST" v-show="!isSubmissionSuccessful">
     
                     <label class="input-arrow">
-                        <input type="email" name="email" id="email" placeholder="Type your email address here…">
+                        <input v-model="emailInput" type="email" name="email" id="email" placeholder="Type your email address here…">
                         <button type="submit" class="submit-btn"></button>
                     </label>
 

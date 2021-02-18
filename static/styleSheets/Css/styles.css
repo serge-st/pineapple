@@ -223,16 +223,24 @@ input#email:hover {
   font-size: 16px;
   text-decoration: underline;
 }
-.checkbox {
+.checkbox,
+.checkbox-clicked {
   position: relative;
-  padding: 5px 6px;
   height: 26px;
   width: 26px;
   display: inline-block;
-  background: #4066A5;
+  border: 1px solid #E3E3E4;
   border-radius: 3px;
 }
 .checkbox:hover {
+  cursor: pointer;
+}
+.checkbox-clicked {
+  padding: 5px 6px;
+  background: #4066A5;
+  border: none;
+}
+.checkbox-clicked:hover {
   cursor: pointer;
 }
 hr {

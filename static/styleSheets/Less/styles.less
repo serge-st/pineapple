@@ -265,14 +265,26 @@ input#email {
 
 .checkbox {
     position: relative;
-    padding: 5px 6px;
+    
     height: 26px;
     width: 26px;
 
     display: inline-block;
 
-    background: @blue;
+    border: 1px solid @light-gray;
+    // background: @blue;
     border-radius: 3px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.checkbox-clicked:extend(.checkbox){
+    padding: 5px 6px;
+
+    background: @blue;
+    border: none;
 
     &:hover {
         cursor: pointer;
