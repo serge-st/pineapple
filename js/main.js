@@ -9,8 +9,15 @@ const app = new Vue({
         regularP: "Subscribe to our newsletter and get 10% discount on pineapple glasses.",
         successP: "You have successfully subscribed to our email listing. Check your email for the discount code.",
         trophyImage: "../static/images/ic_success.svg",
-        isSubmissionSuccessful: 0,
+        emails: [],
+        isSubmissionSuccessful: 0
 
+    },
+    methods: {
+        addEmail(newEmail) {
+            this.emails.push(newEmail);
+            console.log(this.emails);
+        }
     },
     computed: {
         heading() {

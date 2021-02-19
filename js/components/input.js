@@ -15,6 +15,9 @@ export const vueInput = () => {
         methods: {
             sendInput() {
                 this.$emit('email-input-value', this.emailInput);
+            },
+            removeData() {
+                this.emailInput = null;
             }
         }
     

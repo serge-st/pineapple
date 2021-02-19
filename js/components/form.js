@@ -14,33 +14,42 @@ export const vueForm = () => {
             passEmailInput(inputValue){
                 this.emailInput = inputValue;
             },
+            showError(err){
+                this.currentError = err;
+            },
+            submit() {
+                console.log("Submitting Form");
+                this.$emit("form-submitted", this.emailInput);
+                this.emailInput = null;
+                this.$emit('remove-form-data');
+            },
             validateForm() {
-                if (!this.emailInput) return console.log(this.errors.noEmail);
-                if (!this.emailRegEx.test(this.emailInput)) return console.log(this.errors.invalidEmail);
-                if (this.emailRegEx.test(this.emailInput)) {
-                    if (this.emailInput.split(".").pop() === "co") return console.log(this.errors.noColombia);
+                if (!this.emailInput) return this.showError(this.errors.noEmail);
+                if (!this.emailValidation.test(this.emailInput)) return this.showError(this.errors.invalidEmail);
+                if (this.emailValidation.test(this.emailInput)) {
+                    if (this.emailInput.split(".").pop() === "co") return this.showError(this.errors.noColombia);
                 }
-                if (!this.isTermsChecked) return console.log(this.errors.acceptTerms);
+                if (!this.isTermsChecked) return this.showError(this.errors.acceptTerms);
                 // FETCH RECORDS FROM DB TO CHECK IF THE EMAIL IS ALREADY SUBSCRIBED
-                console.log('all goooOOOD');
+                
+                // WHEN ALL IS GOOD SET ERROR TO NOTHING
+                this.showError('');
+                this.submit();
             }
         },
         data() {
             return {
                 emailInput: null,
-                isEmailValid: false,
-                isColombia: false,
-                isTermsChecked: false,
-                alreadyExists: false,
-                isSubmissionSuccessful: 0,
-                emailRegEx: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                emailValidation: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                currentError: "",
                 errors: {
                     noEmail: "Email address is required",
                     invalidEmail: "Please provide a valid e-mail address",
                     noColombia: "We are not accepting subscriptions from Colombia emails",
                     acceptTerms: "You must accept the terms and conditions",
                     emailExists: "The provided email is already subscribed"
-                }
+                },
+                isSubmissionSuccessful: 0,
             };
         },
         template: `
@@ -54,7 +63,7 @@ export const vueForm = () => {
                 <button type="submit" class="submit-btn"></button>
             </label>
 
-            <vue-error message=""></vue-error>
+            <vue-error :message="currentError"></vue-error>
 
             <div class="service-terms">
                 <vue-checkbox @checkbox-value="updateTerms"></vue-checkbox>
