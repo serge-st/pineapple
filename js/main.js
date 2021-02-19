@@ -1,4 +1,7 @@
-import defaultExport from "./components/checkbox.js";
+import {vueCheckbox} from "./components/checkbox.js";
+import {vueInput} from "./components/input.js";
+vueCheckbox();
+vueInput();
 
 const app = new Vue({
     el: '#root',
@@ -17,6 +20,7 @@ const app = new Vue({
 
         emailInput: null,
         isEmailValid: false,
+        isTermsChecked: false,
         isSubmissionSuccessful: 0,
     },
     computed: {

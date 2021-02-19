@@ -30,6 +30,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+[v-cloak] {
+  display: none;
+}
 .primary-text {
   color: #6A707B;
   font-family: Arial;
