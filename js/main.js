@@ -15,10 +15,14 @@ const app = new Vue({
     },
     methods: {
         addEmail(newEmail) {
-            this.emails.push(newEmail);
-            this.providers.push(newEmail.split("@").pop().split(".").shift().replace(/\b(\w)/, l => l.toUpperCase()));
-            this.isSubmissionSuccessful = true;
-            console.log(this.emails, this.providers);
+            fetch("/api/insertEmail.php", {
+                method: 'POST',
+                body: JSON.stringify({email: newEmail, provider: newEmail.split("@").pop().split(".").shift().replace(/\b(\w)/, l => l.toUpperCase())})
+            }).then( response => response.text())
+            .then(data => console.log(data))
+            .then(this.isSubmissionSuccessful = true)
+            .catch(err => console.error(err));
+
         }
     },
     computed: {

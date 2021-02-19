@@ -4,7 +4,7 @@ class DB {
     private static $connection;
     
     private static function openConnection(){
-        $dbAccess = parse_ini_file(__DIR__ . '/../config.ini');
+        $dbAccess = parse_ini_file(__DIR__ . '/../dbConfig.ini');
         $hostname = $dbAccess["mysql.host"];
         $user = $dbAccess["mysql.user"];
         $password = $dbAccess["mysql.password"];
