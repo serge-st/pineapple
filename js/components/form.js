@@ -39,7 +39,7 @@ export const vueForm = () => {
                 <button type="submit" class="submit-btn"></button>
             </label>
 
-            <div class="error-message">Error Message</div>
+            <div class="error-message">We are not accepting subscriptions from Colombia emails</div>
 
             <div class="service-terms">
                 <vue-checkbox @checkbox-value="updateTerms"></vue-checkbox>

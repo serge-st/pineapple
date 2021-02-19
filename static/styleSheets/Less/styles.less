@@ -3,6 +3,8 @@
 @gray: #6A707B;
 @light-gray: #E3E3E4;
 @light: #F2F5FA;
+@error: #D52A4A;
+@error2: #a54066;
 @fb: #4267B2;
 @fb-pressed: #2F4A80;
 @ig: #C13584;
@@ -243,9 +245,15 @@ input#email {
 }
 
 .error-message {
-    display: none;
+    position: absolute;
+    top: 189px;
+    // display: none;
     margin-top: 20px;
+
+
     .primary-text;
+    color: @error;
+    font-size: 11px;
 }
 
 .service-terms {
@@ -565,11 +573,13 @@ footer {
         width: 82px;
     }
     
-    // .error-message {
-    //     display: none;
-    //     margin-top: 20px;
-    //     .primary-text;
-    // }
+    .error-message {
+        position: absolute;
+        top: 608px;
+        margin-top: 20px;
+
+        font-size: 14px;
+    }
 
     .service-terms {
         margin-top: 53px;

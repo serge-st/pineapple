@@ -199,13 +199,16 @@ input#email:hover {
   outline: none;
 }
 .error-message {
-  display: none;
+  position: absolute;
+  top: 189px;
   margin-top: 20px;
   color: #6A707B;
   font-family: Arial;
   font-size: 14px;
   font-style: normal;
   font-weight: normal;
+  color: #D52A4A;
+  font-size: 11px;
 }
 .service-terms {
   margin-top: 20px;
@@ -446,6 +449,12 @@ footer {
     right: 41px;
     height: 68px;
     width: 82px;
+  }
+  .error-message {
+    position: absolute;
+    top: 608px;
+    margin-top: 20px;
+    font-size: 14px;
   }
   .service-terms {
     margin-top: 53px;
