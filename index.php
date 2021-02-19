@@ -1,3 +1,5 @@
+<?php ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +8,8 @@
     <title>Pineapple</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 115 100%22><text y=%22.9em%22 font-size=%2290%22>🍍</text></svg>">
     <link rel="stylesheet" href="/static/styleSheets/Css/styles.css">
-    <!-- DEV Vue Version -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
-    <!-- PROD Vue Version -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
 <body>
 

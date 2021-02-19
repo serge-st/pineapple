@@ -17,8 +17,18 @@ export const vueForm = () => {
             showError(err){
                 this.currentError = err;
             },
+            checkUser: async function() {
+                const response = await fetch(`/api/checkEmail.php?email=${this.emailInput}`);
+                const result = await response.json();
+                if (result) {
+                    return this.showError(this.errors.emailExists);
+                } else {
+                    this.showError('');
+                    this.submit();
+                }
+            },
             submit() {
-                this.$emit("form-submitted", this.emailInput);
+                this.$emit("form-submitted", this.emailInput.toLowerCase());
                 this.emailInput = null;
                 this.$refs.inputRef.removeData();
             },
@@ -29,11 +39,7 @@ export const vueForm = () => {
                     if (this.emailInput.split(".").pop().toLowerCase() === "co") return this.showError(this.errors.noColombia);
                 }
                 if (!this.isTermsChecked) return this.showError(this.errors.acceptTerms);
-                // FETCH RECORDS FROM DB TO CHECK IF THE EMAIL IS ALREADY SUBSCRIBED
-                
-                // WHEN ALL IS GOOD SET ERROR TO NOTHING
-                this.showError('');
-                this.submit();
+                this.checkUser();
             }
         },
         data() {

@@ -10,14 +10,15 @@ const app = new Vue({
         successP: "You have successfully subscribed to our email listing. Check your email for the discount code.",
         trophyImage: "../static/images/ic_success.svg",
         emails: [],
+        providers: [],
         isSubmissionSuccessful: false
-
     },
     methods: {
         addEmail(newEmail) {
             this.emails.push(newEmail);
-            console.log(this.emails);
+            this.providers.push(newEmail.split("@").pop().split(".").shift().replace(/\b(\w)/, l => l.toUpperCase()));
             this.isSubmissionSuccessful = true;
+            console.log(this.emails, this.providers);
         }
     },
     computed: {
