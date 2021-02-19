@@ -18,8 +18,9 @@
         
             <header>
                 
-                <div id="logo">
-                </div>
+                <a href="/">
+                    <div id="logo">
+                </div></a>
                 
                 <nav>
                     <ul id="menu">
@@ -37,15 +38,13 @@
                 <img :src="trophyImage" v-cloak alt="Success Trophy Icon" class="success-trophy" v-show="isSubmissionSuccessful">
         
                 <section class="heading-text-block">
-                    <!-- <h1>Subscribe to newsletter</h1> -->
                     <h1 v-cloak>{{ heading }}</h1>
     
-                    <!-- <p>Subscribe to our newsletter and get 10% discount on pineapple glasses.</p> -->
                     <p v-cloak>{{ paragraph }}</p>
 
                 </section>
     
-                <vue-form @form-submitted="addEmail"></vue-form>
+                <vue-form @form-submitted="addEmail" v-show="!isSubmissionSuccessful"></vue-form>
                 
                 <hr>
     

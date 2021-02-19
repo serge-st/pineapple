@@ -18,16 +18,15 @@ export const vueForm = () => {
                 this.currentError = err;
             },
             submit() {
-                console.log("Submitting Form");
                 this.$emit("form-submitted", this.emailInput);
                 this.emailInput = null;
-                this.$emit('remove-form-data');
+                this.$refs.inputRef.removeData();
             },
             validateForm() {
                 if (!this.emailInput) return this.showError(this.errors.noEmail);
                 if (!this.emailValidation.test(this.emailInput)) return this.showError(this.errors.invalidEmail);
                 if (this.emailValidation.test(this.emailInput)) {
-                    if (this.emailInput.split(".").pop() === "co") return this.showError(this.errors.noColombia);
+                    if (this.emailInput.split(".").pop().toLowerCase() === "co") return this.showError(this.errors.noColombia);
                 }
                 if (!this.isTermsChecked) return this.showError(this.errors.acceptTerms);
                 // FETCH RECORDS FROM DB TO CHECK IF THE EMAIL IS ALREADY SUBSCRIBED
@@ -49,17 +48,16 @@ export const vueForm = () => {
                     acceptTerms: "You must accept the terms and conditions",
                     emailExists: "The provided email is already subscribed"
                 },
-                isSubmissionSuccessful: 0,
             };
         },
         template: `
         <form 
             @submit.prevent="validateForm"
-            v-show="!isSubmissionSuccessful"
+
             action="" method="POST">
     
             <label class="input-arrow">
-                <vue-input @email-input-value="passEmailInput"></vue-input>
+                <vue-input @email-input-value="passEmailInput" ref="inputRef"></vue-input>
                 <button type="submit" class="submit-btn"></button>
             </label>
 
