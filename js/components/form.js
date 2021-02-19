@@ -21,6 +21,7 @@ export const vueForm = () => {
                     if (this.emailInput.split(".").pop() === "co") return console.log(this.errors.noColombia);
                 }
                 if (!this.isTermsChecked) return console.log(this.errors.acceptTerms);
+                // FETCH RECORDS FROM DB TO CHECK IF THE EMAIL IS ALREADY SUBSCRIBED
                 console.log('all goooOOOD');
             }
         },
