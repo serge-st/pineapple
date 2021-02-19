@@ -9,13 +9,20 @@ export const vueForm = () => {
     Vue.component('vue-form', {
         methods: {
             updateTerms(checkboxValue) {
-                console.log(checkboxValue);
                 this.isTermsChecked = checkboxValue;
             },
             passEmailInput(inputValue){
-                console.log(inputValue);
                 this.emailInput = inputValue;
             },
+            validateForm() {
+                if (!this.emailInput) return console.log(this.errors.noEmail);
+                if (!this.emailRegEx.test(this.emailInput)) return console.log(this.errors.invalidEmail);
+                if (this.emailRegEx.test(this.emailInput)) {
+                    if (this.emailInput.split(".").pop() === "co") return console.log(this.errors.noColombia);
+                }
+                if (!this.isTermsChecked) return console.log(this.errors.acceptTerms);
+                console.log('all goooOOOD');
+            }
         },
         data() {
             return {
@@ -25,6 +32,7 @@ export const vueForm = () => {
                 isTermsChecked: false,
                 alreadyExists: false,
                 isSubmissionSuccessful: 0,
+                emailRegEx: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 errors: {
                     noEmail: "Email address is required",
                     invalidEmail: "Please provide a valid e-mail address",
@@ -35,7 +43,9 @@ export const vueForm = () => {
             };
         },
         template: `
-        <form v-show="!isSubmissionSuccessful"
+        <form 
+            @submit.prevent="validateForm"
+            v-show="!isSubmissionSuccessful"
             action="" method="POST">
     
             <label class="input-arrow">
