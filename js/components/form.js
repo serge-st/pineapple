@@ -5,28 +5,16 @@ vueInput();
 
 export const vueForm = () => {
     Vue.component('vue-form', {
-        template: `
-            <form
-            action="" method="POST" v-show="!isSubmissionSuccessful">
-        
-                <label class="input-arrow">
-                    <vue-input @email-input-value="passEmailInput"></vue-input>
-
-                    <button type="submit" class="submit-btn"></button>
-
-                </label>
-
-            
-                <div class="error-message">Error Message</div>
-
-                <div class="service-terms">
-                    <vue-checkbox @checkbox-value="updateTerms"></vue-checkbox>
-
-                    <p>I agree to <a href="#" class="underline"> terms of service</a></p>
-                    
-                </div>
-            </form>
-        `,
+        methods: {
+            updateTerms(checkboxValue) {
+                console.log(checkboxValue);
+                this.isTermsChecked = checkboxValue;
+            },
+            passEmailInput(inputValue){
+                console.log(inputValue);
+                this.emailInput = inputValue;
+            }
+        },
         data() {
             return {
                 errors: {
@@ -42,16 +30,22 @@ export const vueForm = () => {
                 isSubmissionSuccessful: 0,
             };
         },
-        methods: {
-            updateTerms(checkboxValue) {
-                console.log(checkboxValue);
-                this.isTermsChecked = checkboxValue;
-            },
-            passEmailInput(inputValue){
-                console.log(inputValue);
-                this.emailInput = inputValue;
-            }
-        }
+        template: `
+        <form v-show="!isSubmissionSuccessful"
+            action="" method="POST">
     
+            <label class="input-arrow">
+                <vue-input @email-input-value="passEmailInput"></vue-input>
+                <button type="submit" class="submit-btn"></button>
+            </label>
+
+            <div class="error-message">Error Message</div>
+
+            <div class="service-terms">
+                <vue-checkbox @checkbox-value="updateTerms"></vue-checkbox>
+                <p>I agree to <a href="#" class="underline"> terms of service</a></p>
+            </div>
+        </form>
+        `
     });
 }; 
