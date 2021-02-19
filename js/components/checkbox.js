@@ -16,6 +16,7 @@ export const vueCheckbox = () => {
         methods: {
             click() {
                 this.isChecked = !this.isChecked;
+                this.$emit('checkbox-value', this.isChecked);
             }
         }
     });
