@@ -12,9 +12,17 @@ $sortOrder = isset($_GET['order']) && strtolower($_GET['order']) == 'desc' ? 'DE
 $up_or_down = str_replace(array('ASC','DESC'), array('up','down'), $sortOrder); 
 $asc_or_desc = $sortOrder == 'ASC' ? 'desc' : 'asc';
 
-$sql = "SELECT `id`, `created_date`, `email`, `provider` FROM `emails` ORDER BY `$column` $sortOrder";
+// PROVIDER SELECTION
+if (isset($_GET["provider"]) && !empty($_GET["provider"])){
+    $selectedProvider = $_GET["provider"];
+    $sql = "SELECT `id`, `created_date`, `email`, `provider` FROM `emails` WHERE `provider` = '$selectedProvider' ORDER BY `$column` $sortOrder";
+} else {
+    $sql = "SELECT `id`, `created_date`, `email`, `provider` FROM `emails` ORDER BY `$column` $sortOrder";
+}
+
 $requestedData = DB::run($sql);
 
+var_dump($_GET);
 var_dump($sql);
 var_dump($column);
 var_dump($sortOrder);
