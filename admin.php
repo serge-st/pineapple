@@ -9,7 +9,7 @@ $columns = array("created_date", "email", "provider");
 $column = isset($_GET["column"]) && in_array(strtolower($_GET["column"]), $columns) ? strtolower($_GET["column"]) : $columns[0];
 $sortOrder = isset($_GET['order']) && strtolower($_GET['order']) == 'desc' ? 'DESC' : 'ASC';
 
-$up_or_down = str_replace(array('ASC','DESC'), array('down','up'), $sortOrder); 
+$up_or_down = str_replace(array('ASC','DESC'), array('up','down'), $sortOrder); 
 $asc_or_desc = $sortOrder == 'ASC' ? 'desc' : 'asc';
 
 $sql = "SELECT `id`, `created_date`, `email`, `provider` FROM `emails` ORDER BY `$column` $sortOrder";
