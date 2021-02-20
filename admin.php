@@ -2,7 +2,18 @@
 
 require_once __DIR__ . "/helpers/dbWrapper.php";
 
-$allData = DB::run("SELECT `created_date`, `email`, `provider` FROM `emails` ORDER BY `created_date` ASC")->fetch_all(MYSQLI_ASSOC);
+// $allData = DB::run("SELECT `created_date`, `email`, `provider` FROM `emails` ORDER BY `created_date` ASC")->fetch_all(MYSQLI_ASSOC);
+
+$columns = array("created_date", "email", "provider");
+$column = isset($_GET["column"]) && in_array(strtolower($_GET["column"]), $columns) ? strtolower($_GET["column"]) : $columns[0];
+$sortOrder = isset($_GET['order']) && strtolower($_GET['order']) == 'desc' ? 'DESC' : 'ASC';
+
+$sql = "SELECT `created_date`, `email`, `provider` FROM `emails` ORDER BY `$column` $sortOrder";
+$requestedData = DB::run($sql);
+
+var_dump($sql);
+var_dump($column);
+var_dump($sortOrder);
 
 ?>
 
@@ -28,7 +39,7 @@ $allData = DB::run("SELECT `created_date`, `email`, `provider` FROM `emails` ORD
         </thead>
         <tbody>
             <tr>
-            <?php foreach($allData as $user) {?>
+            <?php foreach($requestedData as $user) {?>
             <td><?=$user["created_date"]?></td>
             <td><?=$user["email"]?></td>
             <td><?=$user["provider"]?></td>
