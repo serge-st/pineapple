@@ -12,4 +12,4 @@ CREATE TABLE `pineapple_db`.`emails` (
 alter table `pineapple_db`.`emails` AUTO_INCREMENT=1001;
 
 INSERT INTO `pineapple_db`.`emails` (email, provider)
-VALUES ("bob@gmail.com", "Gmail"), ("dylan@yahoo.com", "Yahoo"), ("mr.smith@outlook.com", "Outlook");
+VALUES ("bob@gmail.com", "Gmail"), ("dylan@yahoo.com", "Yahoo"), ("mr.smith@outlook.com", "Outlook"), ("john@outlook", "Outlook");

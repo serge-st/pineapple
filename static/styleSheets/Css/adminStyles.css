@@ -1,5 +1,28 @@
-div {
+.main-container {
     width: 80%;
 
     margin: 100px auto;
+}
+
+.main-container > * {
+    margin-top: 20px;
+}
+
+.data-table{
+    margin-top: 50px;
+}
+a {
+    color: black;
+    text-decoration: none;
+}
+a:hover 
+{
+     color: black; 
+     text-decoration:none; 
+}
+input[type='checkbox']{
+    cursor: pointer;
+}
+.underline{
+    text-decoration: underline;
 }
