@@ -12,36 +12,54 @@ $sortOrder = isset($_GET['order']) && strtolower($_GET['order']) == 'desc' ? 'DE
 $up_or_down = str_replace(array('ASC','DESC'), array('up','down'), $sortOrder); 
 $asc_or_desc = $sortOrder == 'ASC' ? 'desc' : 'asc';
 
-// PROVIDER SELECTION
-if (isset($_GET["provider"]) && !empty($_GET["provider"])){
+// BASIC SETUP
+$sql = "SELECT `id`, `created_date`, `email`, `provider` FROM `emails`";
+
+// CREATE LINKS FOR EMAIL TABLE HEADER FILTERS
+$createdDateLink = "/admin?column=created_date&order=$asc_or_desc";
+$emailLink = "/admin?column=email&order=$asc_or_desc";
+$providerLink = "/admin?column=provider&order=$asc_or_desc";
+
+if (!empty($_GET["provider"]) && !empty($_GET["emailSearch"])){
     $selectedProvider = $_GET["provider"];
-    $sql = "SELECT `id`, `created_date`, `email`, `provider` FROM `emails` WHERE `provider` = '$selectedProvider'";
+    $selectedEmail = $_GET["emailSearch"];
+    $email = "%" . $_GET["emailSearch"] . "%";
+    $sql .= " WHERE `provider` = '$selectedProvider' AND `email` LIKE '$email'";
+
+    $createdDateLink .= "&provider=$selectedProvider&emailSearch=$selectedEmail";
+    $emailLink .= "&provider=$selectedProvider&emailSearch=$selectedEmail";
+    $providerLink .= "&provider=$selectedProvider&emailSearch=$selectedEmail";
+    
+} elseif (!empty($_GET["provider"])){
+    // PROVIDER SELECTION
+    $selectedProvider = $_GET["provider"];
+    $sql .= " WHERE `provider` = '$selectedProvider'";
 
     // CREATE LINKS FOR EMAIL TABLE HEADER FILTERS
-    $createdDateLink = "/admin?column=created_date&order=$asc_or_desc" . "&provider=$selectedProvider";
-    $emailLink = "/admin?column=email&order=$asc_or_desc" . "&provider=$selectedProvider";
-    $providerLink = "/admin?column=provider&order=$asc_or_desc" . "&provider=$selectedProvider";
-} else {
-    $sql = "SELECT `id`, `created_date`, `email`, `provider` FROM `emails`";
-
-    // CREATE LINKS FOR EMAIL TABLE HEADER FILTERS\
-    $createdDateLink = "/admin?column=created_date&order=$asc_or_desc";
-    $emailLink = "/admin?column=email&order=$asc_or_desc";
-    $providerLink = "/admin?column=provider&order=$asc_or_desc";
-}
-
-// EMAIL SEARH
-if (isset($_GET["emailSearch"]) && !empty($_GET["emailSearch"])){
-    var_dump("email is set");
+    $createdDateLink .= "&provider=$selectedProvider";
+    $emailLink .= "&provider=$selectedProvider";
+    $providerLink .= "&provider=$selectedProvider";
+} elseif (!empty($_GET["emailSearch"])){
+    // EMAIL SEARH
     $email = "%" . $_GET["emailSearch"] . "%";
-    $sql = $sql . " WHERE `email` like '$email'";
+    $selectedEmail = $_GET["emailSearch"];
+    $sql .= " WHERE `email` like '$email'";
     var_dump("SQL BEFORE: " . $sql);
-} else {
-    var_dump("email is NOT set");
+
+    // CREATE LINKS FOR EMAIL TABLE HEADER FILTERS
+    $createdDateLink .= "&emailSearch=$selectedEmail";
+    $emailLink .= "&emailSearch=$selectedEmail";
+    $providerLink .= "&emailSearch=$selectedEmail";
+
+    var_dump($createdDateLink);
 }
+
+
 // FROMING FINAL SQL QUERY:
-var_dump("FINAL SQL: " . $sql . " ORDER BY `$column` $sortOrder");
+$sql .= " ORDER BY `$column` $sortOrder";
+var_dump("FINAL SQL: " . $sql);
 $requestedData = DB::run($sql);
+
 
 // var_dump($_SERVER["REQUEST_URI"]);
 // var_dump($_SERVER);
@@ -90,7 +108,8 @@ $requestedData = DB::run($sql);
                 <tr>
                     <td>
                         <form action="/admin" method="GET">
-                        <input type="text" name="emailSearch">
+                            <input type="text" placeholder="provider" name="provider" value="<?= isset($selectedProvider) ? $selectedProvider : "" ?>">
+                            <input type="text" name="emailSearch">
                             <button type="submit" >Search</button>
                         </form>
                     </td>
