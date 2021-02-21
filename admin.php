@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/helpers/dbWrapper.php";
 // list of email providers
-$providers = DB::run("SELECT DISTINCT `provider` from `emails`")->fetch_all();
+$providers = DB::run("SELECT DISTINCT `provider` FROM `emails` ORDER BY `provider` ASC")->fetch_all();
 
 // !!! NOTE !!! REWRITE FILTER CREATION IN HELPERS IN OOP STYLE
 $columns = array("created_date", "email", "provider");
@@ -16,18 +16,37 @@ $asc_or_desc = $sortOrder == 'ASC' ? 'desc' : 'asc';
 if (isset($_GET["provider"]) && !empty($_GET["provider"])){
     $selectedProvider = $_GET["provider"];
     $sql = "SELECT `id`, `created_date`, `email`, `provider` FROM `emails` WHERE `provider` = '$selectedProvider' ORDER BY `$column` $sortOrder";
+
+    // CREATE LINKS FOR EMAIL TABLE HEADER FILTERS
+    $createdDateLink = "/admin?column=created_date&order=$asc_or_desc" . "&provider=$selectedProvider";
+    $emailLink = "/admin?column=email&order=$asc_or_desc" . "&provider=$selectedProvider";
+    $providerLink = "/admin?column=provider&order=$asc_or_desc" . "&provider=$selectedProvider";
 } else {
     $sql = "SELECT `id`, `created_date`, `email`, `provider` FROM `emails` ORDER BY `$column` $sortOrder";
-}
 
+    // CREATE LINKS FOR EMAIL TABLE HEADER FILTERS\
+    $createdDateLink = "/admin?column=created_date&order=$asc_or_desc";
+    $emailLink = "/admin?column=email&order=$asc_or_desc";
+    $providerLink = "/admin?column=provider&order=$asc_or_desc";
+}
 $requestedData = DB::run($sql);
 
-var_dump($_GET);
-var_dump($sql);
-var_dump($column);
-var_dump($sortOrder);
-var_dump($up_or_down);
-var_dump($asc_or_desc);
+// var_dump($_SERVER["REQUEST_URI"]);
+// var_dump($_SERVER);
+var_dump($_SERVER["QUERY_STRING"]);
+
+// var_dump(isset($selectedProvider) ? "/admin?column=created_date&order=$asc_or_desc" . "&provider=" . $selectedProvider : "/admin?column=created_date&order=$asc_or_desc");
+// var_dump("/admin?column=created_date&order=$asc_or_desc");
+
+
+// if (isset($_GET["provider"]) && !empty($_GET["provider"])) {
+//     var_dump($_GET["provider"]);
+// } 
+// var_dump($sql);
+// var_dump($column);
+// var_dump($sortOrder);
+// var_dump($up_or_down);
+// var_dump($asc_or_desc);
 
 // SELECT `id`, `created_date`, `email`, `provider` FROM `emails` WHERE `provider` = 'gmail' ORDER BY `created_date` ASC
 
@@ -52,13 +71,14 @@ var_dump($asc_or_desc);
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col" colspan="<?=count($providers)?>">Sort By Provider:</th>
+                    <th scope="col" colspan="<?=1 . count($providers)?>">Sort By Provider:</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                <?php foreach($providers as $provider) {?>
-                    <td><a class="underline" href=""><?=$provider[0]?></a></td>
+                    <td><a class="underline" href="/admin">All</a></td>
+                    <?php foreach($providers as $provider) {?>
+                    <td><a class="underline" href="/admin<?= "?provider=" .  $provider[0];?>"><?=$provider[0]?></a></td>
                     <?php } ?>
                 </tr>
             </tbody>
@@ -70,10 +90,10 @@ var_dump($asc_or_desc);
             <tr>
             <th scope="col"><input type="checkbox" name="selectAll" id="selectAll"></th>
 
-            <th scope="col"><a href="/admin?column=created_date&order=<?= $asc_or_desc; ?>">Created On<i class="fas fa-sort<?= $column == 'created_date' ? '-' . $up_or_down : ''; ?>"></i></a></th>
+            <th scope="col"><a href="<?= $createdDateLink; ?>">Created Date<i class="fas fa-sort<?= $column == 'created_date' ? '-' . $up_or_down : ''; ?>"></i></a></th>
 
-            <th scope="col"><a href="/admin?column=email&order=<?= $asc_or_desc; ?>">Email<i class="fas fa-sort<?= $column == 'email' ? '-' . $up_or_down : ''; ?>"></i></a></th>
-            <th scope="col"><a href="/admin?column=provider&order=<?= $asc_or_desc; ?>">Provider<i class="fas fa-sort<?= $column == 'provider' ? '-' . $up_or_down : ''; ?>"></i></a></th>
+            <th scope="col"><a href="<?= $emailLink; ?>">Email<i class="fas fa-sort<?= $column == 'email' ? '-' . $up_or_down : ''; ?>"></i></a></th>
+            <th scope="col"><a href="<?= $providerLink; ?>">Provider<i class="fas fa-sort<?= $column == 'provider' ? '-' . $up_or_down : ''; ?>"></i></a></th>
             <th scope="col">Delete</th>
             </tr>
         </thead>
@@ -84,7 +104,7 @@ var_dump($asc_or_desc);
                 <td><?=$user["created_date"]?></td>
                 <td><?=$user["email"]?></td>
                 <td><?=$user["provider"]?></td>
-                <td><a href="/api/deleteEmail.php?id=<?=$user['id']?>"><i class="fas fa-user-minus"></i></a></td>
+                <td><a href="/api/deleteEmail.php?id=<?=$user['id']?>&q='<?= $_SERVER["QUERY_STRING"];?>'"><i class="fas fa-user-minus"></i></a></td>
                 </tr>
             <?php } ?>
         </tbody>
