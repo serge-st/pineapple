@@ -127,7 +127,7 @@ $requestedData = DB::run($sql);
                 <tr>
                     <td><a class="underline" href="/admin">All</a></td>
                     <?php foreach($providers as $provider) {?>
-                    <td><a class="underline" href="/admin<?= "?provider=" .  $provider[0];?>"><?=$provider[0]?></a></td>
+                    <td><a class="underline" href="/admin<?= "?provider=" .  $provider[0];?><?=!empty($_GET['emailSearch']) ? "&emailSearch=" . $_GET['emailSearch'] : "" ;?>"><?=$provider[0]?></a></td>
                     <?php } ?>
                 </tr>
             </tbody>
