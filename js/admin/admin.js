@@ -1,12 +1,5 @@
-Vue.component('get-count', {
-    template: `<input type="text" name="availableCount"`,
-    created() {
-        this.$root.getAvailableCount(this.$attrs['available-count']);
-    }
-});
-
 Vue.component('email-checkbox', {
-    template: `<input v-on:click='click' class="user-checkbox" type="checkbox" name="id" :value="id">`,
+    template: `<input v-on:click='click' v-model="isChecked" class="user-checkbox" type="checkbox" name="id" :value="id">`,
     props: ['id'],
     created() {
         this.$root.getAvailableCount(this.$attrs['available-count']);
@@ -21,7 +14,7 @@ Vue.component('email-checkbox', {
             console.log("id from checkbox", this.id);
             this.isChecked = !this.isChecked;
             this.$emit('pass-id', this.id);
-        }
+        },
     }
 });
 
@@ -31,20 +24,6 @@ const app = new Vue({
         allCheckboxesSelected: false,
         availableForExport: [],
         selectedCheckboxes: [],
-    },
-    // mounted() {
-    //     document.addEventListener('DOMContentLoaded', function() {
-    //         console.log("loaded");
-    //      }, false);
-    // },
-    computed: {
-        // d() {
-        //     if (this.selectedCheckboxes.length === this.availableForExport) {
-        //         this.allCheckboxesSelected = true;
-        //     } else {
-        //         this.allCheckboxesSelected = false;
-        //     }
-        // }
     },
     methods: {
         compareAvailableCount(){
@@ -69,11 +48,24 @@ const app = new Vue({
             this.compareAvailableCount();
         },
         selectAll() {
-            console.log("selecting all chbxs");
+            if (this.selectedCheckboxes.length !== this.availableForExport.length) {
+                this.selectedCheckboxes = this.availableForExport;
+                for (let key in this.$refs){
+                    this.$refs[key].isChecked = true;
+                }
+            } else {
+                this.selectedCheckboxes = [];
+                for (let key in this.$refs){
+                    this.$refs[key].isChecked = false;
+                }
+            }
         },
-        toggleCheckboxSelection() {
-            console.log("checkbox");
+        selectNone(){
+            this.selectedCheckboxes = [];
+            this.allCheckboxesSelected = false;
+            for (let key in this.$refs){
+                this.$refs[key].isChecked = false;
+            } 
         }
     },
-
 });

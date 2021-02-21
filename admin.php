@@ -1,5 +1,6 @@
 <?php
 
+
 require_once __DIR__ . "/helpers/dbWrapper.php";
 // list of email providers
 $providers = DB::run("SELECT DISTINCT `provider` FROM `emails` ORDER BY `provider` ASC")->fetch_all();
@@ -53,7 +54,7 @@ if (!empty($_GET["provider"]) && !empty($_GET["emailSearch"])){
 // FROMING FINAL SQL QUERY:
 $sql .= " ORDER BY `$column` $sortOrder";
 $requestedData = DB::run($sql);
-
+// var_dump($sql);
 // var_dump($requestedData->num_rows);
 
 ?>
@@ -128,14 +129,13 @@ $requestedData = DB::run($sql);
         <tbody>
             <?php foreach($requestedData as $user) {?>
                 <tr>
-                <!-- <td><input v-model="selectedCheckboxes" class="user-checkbox" type="checkbox" name="id" value="<?=$user['id']?>"></td> -->
                 <td>
-                    <email-checkbox @pass-id="processSelected" id="<?=$user['id']?>" available-count="<?=$user['id']?>"></email-checkbox>
+                    <email-checkbox @pass-id="processSelected" id="<?=$user['id']?>" ref="<?=$user['id']?>" available-count="<?=$user['id']?>"></email-checkbox>
                 </td>
                 <td><?=$user["created_date"]?></td>
                 <td><?=$user["email"]?></td>
                 <td><?=$user["provider"]?></td>
-                <!-- <td><a href="/api/deleteEmail.php?id=<?=$user['id']?>&q='<?= $_SERVER["QUERY_STRING"];?>'"><i class="fas fa-user-minus"></i></a></td> -->
+
 
                 <td>
                     <form action="/api/deleteEmail" method="post">
@@ -152,20 +152,20 @@ $requestedData = DB::run($sql);
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Export To CSV:</th>
+                    <th scope="col">Export Checked Emails To CSV:</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
-                        <form action="/" method="POST">
+                        <form @submit="selectNone" action="/api/exportCSV.php" method="POST">
                             <!-- PASS CURRENT FILTERS -->
                             <input type="hidden" name="query" value="<?= $_SERVER["QUERY_STRING"];?>">
                             
+                            <!-- PASS SELECTED EMAIL IDS -->
+                            <input type="hidden" name="ids" v-model="selectedCheckboxes">
 
-                            <!-- <input  type="hidden" name="availableCount" value=""> -->
-
-                            <button type="submit" >EXPORT</button>
+                            <button type="submit" :disabled="!selectedCheckboxes.length">EXPORT</button>
                         </form>
                     </td>
                 </tr>
