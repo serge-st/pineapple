@@ -54,6 +54,7 @@ if (!empty($_GET["provider"]) && !empty($_GET["emailSearch"])){
 $sql .= " ORDER BY `$column` $sortOrder";
 $requestedData = DB::run($sql);
 
+// var_dump($requestedData->num_rows);
 
 ?>
 
@@ -66,11 +67,14 @@ $requestedData = DB::run($sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
     <link rel="stylesheet" href="./static/styleSheets/Css/adminStyles.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
     <title>Admin Page</title>
 </head>
 <body>
-    <div class="main-container">
-        
+    <div class="main-container" id="root">
+
         <!-- SEARCH FIELD -->
         <table class="table">
             <thead>
@@ -112,7 +116,7 @@ $requestedData = DB::run($sql);
         <table class="table data-table">
         <thead>
             <tr>
-            <th scope="col"><input class="select-all-checkbox" type="checkbox" name="selectAll" id="selectAll"></th>
+            <th scope="col"><input @click="selectAll" v-model="allCheckboxesSelected" class="select-all-checkbox" type="checkbox" name="selectAll" id="selectAll"></th>
 
             <th scope="col"><a href="<?= $createdDateLink; ?>">Created Date<i class="fas fa-sort<?= $column == 'created_date' ? '-' . $up_or_down : ''; ?>"></i></a></th>
 
@@ -124,7 +128,10 @@ $requestedData = DB::run($sql);
         <tbody>
             <?php foreach($requestedData as $user) {?>
                 <tr>
-                <td><input class="user-checkbox" type="checkbox" name="selectUser<?=$user['id']?>" id="selectUser<?=$user['id']?>"></td>
+                <!-- <td><input v-model="selectedCheckboxes" class="user-checkbox" type="checkbox" name="id" value="<?=$user['id']?>"></td> -->
+                <td>
+                    <email-checkbox @pass-id="processSelected" id="<?=$user['id']?>" available-count="<?=$user['id']?>"></email-checkbox>
+                </td>
                 <td><?=$user["created_date"]?></td>
                 <td><?=$user["email"]?></td>
                 <td><?=$user["provider"]?></td>
@@ -140,6 +147,31 @@ $requestedData = DB::run($sql);
             <?php } ?>
         </tbody>
         </table>
+
+        <!-- EXPORT TO CSV -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Export To CSV:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <form action="/" method="POST">
+                            <!-- PASS CURRENT FILTERS -->
+                            <input type="hidden" name="query" value="<?= $_SERVER["QUERY_STRING"];?>">
+                            
+
+                            <!-- <input  type="hidden" name="availableCount" value=""> -->
+
+                            <button type="submit" >EXPORT</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>   
+    <script src="./js/admin/admin.js"></script>
 </body>
 </html>

@@ -20,10 +20,6 @@ a:hover {
 input[type='checkbox'] {
     cursor: pointer;
 }
-.select-all-checkbox {
-    position: relative;
-    bottom: 3px;
-}
 .underline {
     text-decoration: underline;
 }
@@ -31,8 +27,6 @@ form {
     margin-block-end: 0;
 }
 .delete-btn {
-    position: relative;
-    top: 2px;
 	padding: 0;
     background: none;
 	border: none;
@@ -40,8 +34,4 @@ form {
 	color: black;
 	font: inherit;
 	outline: inherit;
-}
-.user-checkbox {
-    position: relative;
-    top: 4px;
 }
