@@ -15,25 +15,37 @@ $asc_or_desc = $sortOrder == 'ASC' ? 'desc' : 'asc';
 // PROVIDER SELECTION
 if (isset($_GET["provider"]) && !empty($_GET["provider"])){
     $selectedProvider = $_GET["provider"];
-    $sql = "SELECT `id`, `created_date`, `email`, `provider` FROM `emails` WHERE `provider` = '$selectedProvider' ORDER BY `$column` $sortOrder";
+    $sql = "SELECT `id`, `created_date`, `email`, `provider` FROM `emails` WHERE `provider` = '$selectedProvider'";
 
     // CREATE LINKS FOR EMAIL TABLE HEADER FILTERS
     $createdDateLink = "/admin?column=created_date&order=$asc_or_desc" . "&provider=$selectedProvider";
     $emailLink = "/admin?column=email&order=$asc_or_desc" . "&provider=$selectedProvider";
     $providerLink = "/admin?column=provider&order=$asc_or_desc" . "&provider=$selectedProvider";
 } else {
-    $sql = "SELECT `id`, `created_date`, `email`, `provider` FROM `emails` ORDER BY `$column` $sortOrder";
+    $sql = "SELECT `id`, `created_date`, `email`, `provider` FROM `emails`";
 
     // CREATE LINKS FOR EMAIL TABLE HEADER FILTERS\
     $createdDateLink = "/admin?column=created_date&order=$asc_or_desc";
     $emailLink = "/admin?column=email&order=$asc_or_desc";
     $providerLink = "/admin?column=provider&order=$asc_or_desc";
 }
+
+// EMAIL SEARH
+if (isset($_GET["emailSearch"]) && !empty($_GET["emailSearch"])){
+    var_dump("email is set");
+    $email = "%" . $_GET["emailSearch"] . "%";
+    $sql = $sql . " WHERE `email` like '$email'";
+    var_dump("SQL BEFORE: " . $sql);
+} else {
+    var_dump("email is NOT set");
+}
+// FROMING FINAL SQL QUERY:
+var_dump("FINAL SQL: " . $sql . " ORDER BY `$column` $sortOrder");
 $requestedData = DB::run($sql);
 
 // var_dump($_SERVER["REQUEST_URI"]);
 // var_dump($_SERVER);
-var_dump($_SERVER["QUERY_STRING"]);
+// var_dump($_SERVER["QUERY_STRING"]);
 
 // var_dump(isset($selectedProvider) ? "/admin?column=created_date&order=$asc_or_desc" . "&provider=" . $selectedProvider : "/admin?column=created_date&order=$asc_or_desc");
 // var_dump("/admin?column=created_date&order=$asc_or_desc");
@@ -67,6 +79,24 @@ var_dump($_SERVER["QUERY_STRING"]);
 </head>
 <body>
     <div class="main-container">
+        <!-- SEARCH FIELD -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Search Email:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <form action="/admin" method="GET">
+                        <input type="text" name="emailSearch">
+                            <button type="submit" >Search</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <!-- TABLE WITH PROVIDER NAMES -->
         <table class="table">
             <thead>
@@ -88,7 +118,7 @@ var_dump($_SERVER["QUERY_STRING"]);
         <table class="table data-table">
         <thead>
             <tr>
-            <th scope="col"><input type="checkbox" name="selectAll" id="selectAll"></th>
+            <th scope="col"><input class="select-all-checkbox" type="checkbox" name="selectAll" id="selectAll"></th>
 
             <th scope="col"><a href="<?= $createdDateLink; ?>">Created Date<i class="fas fa-sort<?= $column == 'created_date' ? '-' . $up_or_down : ''; ?>"></i></a></th>
 
@@ -109,7 +139,7 @@ var_dump($_SERVER["QUERY_STRING"]);
                 <td>
                     <form action="/api/deleteEmail" method="post">
                     <input type="hidden" name="query" value="<?= $_SERVER["QUERY_STRING"];?>">
-                        <button class="delete-btn" type="submit" name="id" value="<?= $user['id'] ;?>" class="btn-link"><i class="fas fa-user-minus"></i></button>
+                        <button class="delete-btn" type="submit" name="id" value="<?= $user['id'] ;?>"><i class="fas fa-user-minus"></i></button>
                     </form>
                 </td>
                 </tr>
