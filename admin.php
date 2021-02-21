@@ -100,11 +100,18 @@ var_dump($_SERVER["QUERY_STRING"]);
         <tbody>
             <?php foreach($requestedData as $user) {?>
                 <tr>
-                <td><input type="checkbox" name="selectUser<?=$user['id']?>" id="selectUser<?=$user['id']?>"></td>
+                <td><input class="user-checkbox" type="checkbox" name="selectUser<?=$user['id']?>" id="selectUser<?=$user['id']?>"></td>
                 <td><?=$user["created_date"]?></td>
                 <td><?=$user["email"]?></td>
                 <td><?=$user["provider"]?></td>
-                <td><a href="/api/deleteEmail.php?id=<?=$user['id']?>&q='<?= $_SERVER["QUERY_STRING"];?>'"><i class="fas fa-user-minus"></i></a></td>
+                <!-- <td><a href="/api/deleteEmail.php?id=<?=$user['id']?>&q='<?= $_SERVER["QUERY_STRING"];?>'"><i class="fas fa-user-minus"></i></a></td> -->
+
+                <td>
+                    <form action="/api/deleteEmail" method="post">
+                    <input type="hidden" name="query" value="<?= $_SERVER["QUERY_STRING"];?>">
+                        <button class="delete-btn" type="submit" name="id" value="<?= $user['id'] ;?>" class="btn-link"><i class="fas fa-user-minus"></i></button>
+                    </form>
+                </td>
                 </tr>
             <?php } ?>
         </tbody>
