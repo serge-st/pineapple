@@ -49,17 +49,24 @@ const app = new Vue({
     methods: {
         compareAvailableCount(){
             console.log("watched");
-            if (this.availableForExport === this.selectedCheckboxes.length){
+            if (this.availableForExport.length === this.selectedCheckboxes.length){
                 console.log("full");
                 this.allCheckboxesSelected = true;
+            } else {
+                this.allCheckboxesSelected = false;
             }
         },
         getAvailableCount(num) {
             this.availableForExport.push(Number(num));
         },
         processSelected(id){
+            if (this.selectedCheckboxes.includes(id)){
+                this.selectedCheckboxes = this.selectedCheckboxes.filter(el => el !== id);
+            } else {
+                this.selectedCheckboxes.push(id);
+            }
             console.log("id from root: " + id);
-            this.selectedCheckboxes.push(id);
+            this.compareAvailableCount();
         },
         selectAll() {
             console.log("selecting all chbxs");
