@@ -108,7 +108,7 @@ $requestedData = DB::run($sql);
                 <tr>
                     <td>
                         <form action="/admin" method="GET">
-                            <input type="text" placeholder="provider" name="provider" value="<?= isset($selectedProvider) ? $selectedProvider : "" ?>">
+                            <input type="hidden" name="provider" value="<?= isset($selectedProvider) ? $selectedProvider : "" ?>">
                             <input type="text" name="emailSearch">
                             <button type="submit" >Search</button>
                         </form>
