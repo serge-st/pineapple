@@ -21,6 +21,7 @@ $emailLink = "/admin?column=email&order=$asc_or_desc";
 $providerLink = "/admin?column=provider&order=$asc_or_desc";
 
 if (!empty($_GET["provider"]) && !empty($_GET["emailSearch"])){
+    // SEARCH AND PROVIDER SELECTION TOGETHER
     $selectedProvider = $_GET["provider"];
     $selectedEmail = $_GET["emailSearch"];
     $email = "%" . $_GET["emailSearch"] . "%";
@@ -35,7 +36,6 @@ if (!empty($_GET["provider"]) && !empty($_GET["emailSearch"])){
     $selectedProvider = $_GET["provider"];
     $sql .= " WHERE `provider` = '$selectedProvider'";
 
-    // CREATE LINKS FOR EMAIL TABLE HEADER FILTERS
     $createdDateLink .= "&provider=$selectedProvider";
     $emailLink .= "&provider=$selectedProvider";
     $providerLink .= "&provider=$selectedProvider";
@@ -44,42 +44,15 @@ if (!empty($_GET["provider"]) && !empty($_GET["emailSearch"])){
     $email = "%" . $_GET["emailSearch"] . "%";
     $selectedEmail = $_GET["emailSearch"];
     $sql .= " WHERE `email` like '$email'";
-    var_dump("SQL BEFORE: " . $sql);
 
-    // CREATE LINKS FOR EMAIL TABLE HEADER FILTERS
     $createdDateLink .= "&emailSearch=$selectedEmail";
     $emailLink .= "&emailSearch=$selectedEmail";
     $providerLink .= "&emailSearch=$selectedEmail";
-
-    var_dump($createdDateLink);
 }
-
 
 // FROMING FINAL SQL QUERY:
 $sql .= " ORDER BY `$column` $sortOrder";
-var_dump("FINAL SQL: " . $sql);
 $requestedData = DB::run($sql);
-
-
-// var_dump($_SERVER["REQUEST_URI"]);
-// var_dump($_SERVER);
-// var_dump($_SERVER["QUERY_STRING"]);
-
-// var_dump(isset($selectedProvider) ? "/admin?column=created_date&order=$asc_or_desc" . "&provider=" . $selectedProvider : "/admin?column=created_date&order=$asc_or_desc");
-// var_dump("/admin?column=created_date&order=$asc_or_desc");
-
-
-// if (isset($_GET["provider"]) && !empty($_GET["provider"])) {
-//     var_dump($_GET["provider"]);
-// } 
-// var_dump($sql);
-// var_dump($column);
-// var_dump($sortOrder);
-// var_dump($up_or_down);
-// var_dump($asc_or_desc);
-
-// SELECT `id`, `created_date`, `email`, `provider` FROM `emails` WHERE `provider` = 'gmail' ORDER BY `created_date` ASC
-
 
 
 ?>
@@ -97,6 +70,7 @@ $requestedData = DB::run($sql);
 </head>
 <body>
     <div class="main-container">
+        
         <!-- SEARCH FIELD -->
         <table class="table">
             <thead>
@@ -116,6 +90,7 @@ $requestedData = DB::run($sql);
                 </tr>
             </tbody>
         </table>
+
         <!-- TABLE WITH PROVIDER NAMES -->
         <table class="table">
             <thead>
