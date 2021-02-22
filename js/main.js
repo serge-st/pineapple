@@ -19,10 +19,8 @@ const app = new Vue({
                 method: 'POST',
                 body: JSON.stringify({email: newEmail, provider: newEmail.split("@").pop().split(".").shift().replace(/\b(\w)/, l => l.toUpperCase())})
             }).then( response => response.text())
-            .then(data => console.log(data))
             .then(this.isSubmissionSuccessful = true)
             .catch(err => console.error(err));
-
         }
     },
     computed: {

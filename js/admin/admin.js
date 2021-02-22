@@ -11,7 +11,6 @@ Vue.component('email-checkbox', {
     },
     methods: {
         click() {
-            console.log("id from checkbox", this.id);
             this.isChecked = !this.isChecked;
             this.$emit('pass-id', this.id);
         },
@@ -26,15 +25,6 @@ const app = new Vue({
         selectedCheckboxes: [],
     },
     methods: {
-        compareAvailableCount(){
-            console.log("watched");
-            if (this.availableForExport.length === this.selectedCheckboxes.length){
-                console.log("full");
-                this.allCheckboxesSelected = true;
-            } else {
-                this.allCheckboxesSelected = false;
-            }
-        },
         getAvailableCount(num) {
             this.availableForExport.push(Number(num));
         },
@@ -44,8 +34,10 @@ const app = new Vue({
             } else {
                 this.selectedCheckboxes.push(id);
             }
-            console.log("id from root: " + id);
-            this.compareAvailableCount();
+        },
+        submitExport(newExport){
+            console.log(newExport);
+
         },
         selectAll() {
             if (this.selectedCheckboxes.length !== this.availableForExport.length) {
@@ -54,10 +46,7 @@ const app = new Vue({
                     this.$refs[key].isChecked = true;
                 }
             } else {
-                this.selectedCheckboxes = [];
-                for (let key in this.$refs){
-                    this.$refs[key].isChecked = false;
-                }
+                this.selectNone();
             }
         },
         selectNone(){

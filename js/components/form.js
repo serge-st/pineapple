@@ -17,6 +17,15 @@ export const vueForm = () => {
             showError(err){
                 this.currentError = err;
             },
+            validateForm() {
+                if (!this.emailInput) return this.showError(this.errors.noEmail);
+                if (!this.emailValidation.test(this.emailInput)) return this.showError(this.errors.invalidEmail);
+                if (this.emailValidation.test(this.emailInput)) {
+                    if (this.emailInput.split(".").pop().toLowerCase() === "co") return this.showError(this.errors.noColombia);
+                }
+                if (!this.isTermsChecked) return this.showError(this.errors.acceptTerms);
+                this.checkUser();
+            },
             checkUser: async function() {
                 const response = await fetch(`/api/checkEmail.php?email=${this.emailInput}`);
                 const result = await response.json();
@@ -32,15 +41,6 @@ export const vueForm = () => {
                 this.emailInput = null;
                 this.$refs.inputRef.removeData();
             },
-            validateForm() {
-                if (!this.emailInput) return this.showError(this.errors.noEmail);
-                if (!this.emailValidation.test(this.emailInput)) return this.showError(this.errors.invalidEmail);
-                if (this.emailValidation.test(this.emailInput)) {
-                    if (this.emailInput.split(".").pop().toLowerCase() === "co") return this.showError(this.errors.noColombia);
-                }
-                if (!this.isTermsChecked) return this.showError(this.errors.acceptTerms);
-                this.checkUser();
-            }
         },
         data() {
             return {

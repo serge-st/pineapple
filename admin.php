@@ -1,11 +1,10 @@
 <?php
 
-
 require_once __DIR__ . "/helpers/dbWrapper.php";
-// list of email providers
+// GET LIST OF EMAIL PROVIDERS
 $providers = DB::run("SELECT DISTINCT `provider` FROM `emails` ORDER BY `provider` ASC")->fetch_all();
 
-// !!! NOTE !!! REWRITE FILTER CREATION IN HELPERS IN OOP STYLE
+// EMAIL FILTERS
 $columns = array("created_date", "email", "provider");
 $column = isset($_GET["column"]) && in_array(strtolower($_GET["column"]), $columns) ? strtolower($_GET["column"]) : $columns[0];
 $sortOrder = isset($_GET['order']) && strtolower($_GET['order']) == 'desc' ? 'DESC' : 'ASC';
@@ -13,7 +12,7 @@ $sortOrder = isset($_GET['order']) && strtolower($_GET['order']) == 'desc' ? 'DE
 $up_or_down = str_replace(array('ASC','DESC'), array('up','down'), $sortOrder); 
 $asc_or_desc = $sortOrder == 'ASC' ? 'desc' : 'asc';
 
-// BASIC SETUP
+// BASIC QUERY SETUP
 $sql = "SELECT `id`, `created_date`, `email`, `provider` FROM `emails`";
 
 // CREATE LINKS FOR EMAIL TABLE HEADER FILTERS
@@ -54,8 +53,6 @@ if (!empty($_GET["provider"]) && !empty($_GET["emailSearch"])){
 // FROMING FINAL SQL QUERY:
 $sql .= " ORDER BY `$column` $sortOrder";
 $requestedData = DB::run($sql);
-// var_dump($sql);
-// var_dump($requestedData->num_rows);
 
 ?>
 
@@ -158,10 +155,7 @@ $requestedData = DB::run($sql);
             <tbody>
                 <tr>
                     <td>
-                        <form @submit="selectNone" action="/api/exportCSV.php" method="POST">
-                            <!-- PASS CURRENT FILTERS -->
-                            <input type="hidden" name="query" value="<?= $_SERVER["QUERY_STRING"];?>">
-                            
+                        <form action="/api/exportCSV.php" method="POST">
                             <!-- PASS SELECTED EMAIL IDS -->
                             <input type="hidden" name="ids" v-model="selectedCheckboxes">
 
