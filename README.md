@@ -1,4 +1,8 @@
 # Pineapple Web Developer Test
+Landing page to collect email subscribtions. Created using Vue, Apache, MySQL.
+Submitted emails are saved to the databse. The list of emails is accessible at /admin.
+Filter, search, csv export functionalities are available at /admin page.
+
 ## How to launch locally:
 1. Start Apache server
 2. Start MySQL server
